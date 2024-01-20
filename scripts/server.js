@@ -1,18 +1,22 @@
-// const express = require('express')
 import express from 'express';
-// const puppeteer = require('puppeteer')
 import puppeteer from 'puppeteer';
+import cors from "cors"
+
 const app = express();
-app.get('/', (req, res) => {
+const port = 3000;
+
+app.use(cors());
+
+app.get('/pdf_generate', (req, res) => {
     (async () => {
-        console.log("test")
-        const browser = await puppeteer.launch({headless:"new"})
-        const page = await browser.newPage()
-        await page.goto('http://localhost:5173/')
-        const buffer = await page.pdf({ format: 'A4' })
-        res.type('application/pdf')
-        res.send(buffer)
-        browser.close()
+        const browser = await puppeteer.launch({headless:"new"});
+        const page = await browser.newPage();
+        await page.goto('http://localhost:5173/charts');
+        const pdf = await page.pdf({format: 'A4'});
+        res.type('application/pdf');
+        res.send(pdf);
+        browser.close();
     })()
-})
-app.listen(3001)
+});
+
+app.listen(port, ()=>console.log(`Server listening to port: ${port}`));

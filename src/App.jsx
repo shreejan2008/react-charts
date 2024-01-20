@@ -2,7 +2,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { downloadPdf } from './puppeteer/pdf_generate'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,7 +28,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <a href={"http://localhost:3001/"}>Download pdf</a>
+      <a href='http://localhost:3000/pdf_generate' target='_blank'><button>Download pdf</button></a>
     </>
   )
 }
