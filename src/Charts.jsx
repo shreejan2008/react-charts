@@ -72,7 +72,7 @@ function Charts(){
             options={{
                 responsive: true,
                 layout:{
-                    padding: 15
+                    padding: 70
                 },
                 plugins:{
                     legend: {
@@ -82,11 +82,13 @@ function Charts(){
                         align: 'end',
                         anchor: 'end',
                         display: true,
-                        formatter: function(value){
-                            return value.toFixed(1)
+                        formatter: function(value, context){
+                            // return value.toFixed(1)
+                            return context.chart.data.labels[context.dataIndex]
                         },
                         font: {
-                            weight: 'bold'
+                            weight: 'bold',
+                            size:8
                         }
                     }
                 }
