@@ -2,6 +2,8 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
+import { Box, Flex } from "@chakra-ui/react";
+import Table from "./components/Table";
 
 function Charts(){
   const api_data =  {
@@ -67,33 +69,39 @@ function Charts(){
     },[])
 
     return (
-        <Doughnut 
-            data={data}
-            options={{
-                responsive: true,
-                layout:{
-                    padding: 70
-                },
-                plugins:{
-                    legend: {
-                        display: false,
-                    },
-                    datalabels: {
-                        align: 'end',
-                        anchor: 'end',
-                        display: true,
-                        formatter: function(value, context){
-                            // return value.toFixed(1)
-                            return context.chart.data.labels[context.dataIndex]
+        <Flex direction={"row"} align={"center"} height={"100%"} width={"100%"} gap={"100px"}>
+            <Flex flex={"40%"}>
+                <Doughnut 
+                    data={data}
+                    options={{
+                        responsive: true,
+                        layout:{
+                            padding: 70
                         },
-                        font: {
-                            weight: 'bold',
-                            size:8
+                        plugins:{
+                            legend: {
+                                display: false,
+                            },
+                            datalabels: {
+                                align: 'end',
+                                anchor: 'end',
+                                display: true,
+                                formatter: function(value, context){
+                                    return context.chart.data.labels[context.dataIndex]
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size:8
+                                }
+                            }
                         }
-                    }
-                }
-            }}
-        />
+                    }}
+                />
+            </Flex>
+            <Flex flex={"70%"}>
+                <Table data={api_data.SECTOR}/>
+            </Flex>
+        </Flex>
     );
 }
 

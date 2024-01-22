@@ -11,7 +11,7 @@ app.get('/pdf_generate', (req, res) => {
     (async () => {
         const browser = await puppeteer.launch({headless:"new"});
         const page = await browser.newPage();
-        await page.goto('http://localhost:5173/charts');
+        await page.goto('http://localhost:5173/charts', { waitUntil: "networkidle2" });
         const pdf = await page.pdf({format: 'A4'});
         res.type('application/pdf');
         res.send(pdf);
